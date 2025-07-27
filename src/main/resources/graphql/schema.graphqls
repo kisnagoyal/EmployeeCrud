@@ -1,0 +1,63 @@
+type Employee {
+    id: ID!
+    name: String!
+    email: String!
+    yearsOfExperience: Int!
+    salary: Float!      # Computed dynamically
+    department: Department!
+}
+
+type Department {
+    id: ID!
+    name: String!
+    location: String!
+}
+
+# Queries
+type Query {
+    employees: [Employee!]!
+    employee(id: ID!): Employee
+
+    departments: [Department!]!
+    department(id: ID!): Department
+
+    employeesByDepartment(name: String!, location: String!): [Employee!]!
+
+}
+
+type Mutation {
+    # Employee operations
+    createEmployee(
+        name: String!
+        email: String!
+        yearsOfExperience: Int!
+        departmentId: ID!
+    ): Employee!
+
+    updateEmployee(
+        id: ID!
+        name: String
+        email: String
+        yearsOfExperience: Int
+        departmentId: ID
+    ): Employee!
+
+    deleteEmployee(id: ID!): Boolean!
+
+    # Department operations
+    createDepartment(
+        name: String!
+        location: String!
+    ): Department!
+
+    updateDepartment(
+        id: ID!
+        name: String
+        location: String
+    ): Department!
+
+    deleteDepartment(id: ID!): Boolean!
+
+}
+
+
